@@ -2,9 +2,23 @@
 // Remember the LIFO (Last-In, First-Out) rule
 // Make sure to build a temporary stack
 
-const Stack = require('../lib/Stack')
+const Stack = require("../lib/Stack");
 
 function removeDuplicates(stack) {
+  const newArray = [];
+
+  const tempStack = new Stack();
+
+  while (!stack.isEmpty()) {
+    const current = stack.pop();
+    if (!newArray.includes(current)) {
+      newArray.push(current);
+      tempStack.push(current);
+    }
+  }
+  while (!tempStack.isEmpty()) {
+    stack.push(tempStack.pop());
+  }
   // your code here
 }
 
@@ -17,5 +31,5 @@ stack.push(5);
 stack.push(1);
 stack.push(3);
 
-removeDuplicates(stack)
-console.log(stack.printStack()) // [5, 2, 1, 3]
+removeDuplicates(stack);
+console.log(stack.printStack()); // [5, 2, 1, 3]
